@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Test Task</title>
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		<div id="exchange_module">
+			<div class="exchange_module_inner">
+				<div class="currency_wrap">
+					<div class="currency_block" v-for="currency in currencys" @click="selectCoin(currency.name)">
+						<div class="currency_icon">
+							<img :src="'img/' + currency.name + '.png'" alt="">
+							<p class="currency_name">{{currency.name}}</p>
+						</div>
+						<div class="currency_prices" >
+							<div class="currency_price">
+								<div class="currency_price_title">USD:</div>
+								<div class="currency_price_amount">{{currency.USD.toFixed(2)}}</div>
+							</div>
+							<div class="currency_price">
+								<div class="currency_price_title">EUR:</div>
+								<div class="currency_price_amount">{{currency.EUR.toFixed(2)}}</div>
+							</div>
+							<div class="currency_price">
+								<div class="currency_price_title">RUB:</div>
+								<div class="currency_price_amount">{{currency.RUB.toFixed(2)}}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<h2 class="selected_coin"> Selected coin: {{currency_from}}</h2>
+			  
+				<div class="volume_wrap">
+					<label for="exchange_volume">Volume: </label> <input type="number" name='exchange_volume' v-model="currency_volume_from" id="exchange_volume">
+				</div>
+
+				<div class="convert_currency_wrap">
+					<div class="convert_currency" v-for="convert_currency in convert_currencys" @click="selectCurrency(convert_currency)">
+						{{convert_currency}}
+					</div>
+				</div>
+
+				<div v-if="currency_from != '' && currency_to != ''" class="result_convertation">
+					{{currency_volume_from}}{{currency_from}} will be {{currency_price_amount.toFixed(2) * currency_volume_from}} in {{currency_to}}
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>		
+
+<script>
+	var exchange_module = new Vue({
+  el: '#exchange_module',
+  data: {
+    message: 'Привет, Vue!',
+    currency_volume_from: 0,
+    currency_from: '',
+    currency_price_amount: 0,
+    currency_to: '',
+    convert_currencys:['EUR','USD','RUB'],
+    currencys: {
+    		'BTC':{'name':'BTC','factor':50,'USD':0,'EUR':0,'RUB':0},
+    		'ETH':{'name':'ETH','factor':15,'USD':0,'EUR':0,'RUB':0},
+    		'XRP':{'name':'XRP','factor':0.5,'USD':0,'EUR':0,'RUB':0}
+    },
+  },
+  watch:{
+
+  },
+  methods:{
+  		selectCoin: function(coin) {
+  				this.currency_from = coin;
+   		  	this.currency_price_amount = this.currencys[coin][this.currency_to]; 				
+  		},
+  		selectCurrency: function(currency) {
+  				this.currency_to = currency;
+  		  	this.currency_price_amount = this.currencys[this.currency_from][currency];
+  		},
+  		setVolume: function(volume) {
+  				this.currency_volume_to = volume;
+  		},
+  		getCurrancys: function(){
+
+  			$.ajax({
+  				url: 'https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11',
+  				dataType: 'json',
+  				success: function(json) {
+  						// app.currencys = json;
+  						for (var i = 0; exchange_module.convert_currencys.length >= i; i++) {
+  							 exchange_module.currencys['BTC'][exchange_module.convert_currencys[i]] = exchange_module.currencys['BTC']['factor'] /  json[i]['buy'] ; 			
+  							 exchange_module.currencys['ETH'][exchange_module.convert_currencys[i]] = exchange_module.currencys['ETH']['factor'] /  json[i]['buy'] ; 		
+  							 exchange_module.currencys['XRP'][exchange_module.convert_currencys[i]] = exchange_module.currencys['XRP']['factor'] /  json[i]['buy'] ; 		
+  						} 
+  				}
+  			})
+  		}
+  },
+  beforeMount(){
+  	this.getCurrancys();
+  }
+})
+</script>
+	</html>

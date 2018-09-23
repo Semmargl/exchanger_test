@@ -1,0 +1,138 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+body{
+    font-family: sans-serif;
+}
+#exchange_module{
+	width: 100%;
+	height: 100vh;
+  background-color: #070127;
+  color: #f1f1f1;
+}
+.selected_coin{
+  text-align: center;
+  color: #a697f5;
+  font-size: 16px;
+}
+.exchange_module_inner{
+  margin: auto;
+	padding: 50px 10px;
+   max-width: 920px;
+  display: flex;
+  flex-flow: column;
+}
+.result_convertation{
+	color: #86c551;
+  text-align: center;
+  font-size: 16px;
+}
+.convert_currency_wrap{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+.convert_currency{
+  padding: 5px;
+  color: #86c551;
+  background: #3a4579;
+  margin: 0 10px;
+  cursor: pointer;
+}
+#exchange_volume{
+  background: #070127;
+  border: 2px solid #3a4579;
+  padding: 3px 10px;
+  width: 300px;
+  color: #98a9f9;
+}
+.volume_wrap {
+    margin: 0 auto 20px;
+    position: relative;
+}
+.volume_wrap label{
+  position: absolute;
+  left: -80px;
+	padding: 4px;								
+  color: #86c551;
+}
+.currency_block{
+	padding: 20px 15px;
+  background: #3a4579;
+  width: 300px;
+  height: 140px;
+  cursor: pointer;	
+  margin: 10px;	
+}
+.currency_icon{
+	float: left;
+	margin-right: 30px;
+}
+.currency_prices{
+	float: left;
+}
+.currency_price{
+	padding: 	5px 0;
+}
+.currency_icon .currency_name{
+  text-align: center;
+  font-size: 13px;
+  padding-top: 	5px;
+  font-weight: 	bold;
+  color: #86c551;
+}
+.selected_coin{
+	margin-bottom: 40px;	
+}
+.currency_wrap{
+	display: flex;	
+	margin-bottom: 40px;	
+}
+.currency_price_title{
+	    display: inline-block;
+	    margin-right: 5px;
+}
+.currency_price_amount{
+	    display: inline-block;
+}
